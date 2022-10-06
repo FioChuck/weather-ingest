@@ -6,4 +6,5 @@ def hello_world(request):
         The response text, or any set of values that can be turned into a
         Response object using `make_response`
     """
+    print('test')
     return "Hello World!"
