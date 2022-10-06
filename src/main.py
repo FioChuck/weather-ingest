@@ -1,4 +1,4 @@
-def hello_world(request):
+def main(request):
     """
     Args:
         request (flask.Request): The request object
