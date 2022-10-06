@@ -10,11 +10,11 @@ jobs:
 
     steps:
     # checkout to our repository so we have access to the source code
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     
     # the actual deployment to google
     - name: Cloud Functions Deploy
-      uses: google-github-actions/deploy-cloud-functions@v0.1.2
+      uses: google-github-actions/auth@v0
       with:
         credentials: ${{ secrets.GCP_SA_KEY }}
         name: weather-ingest
