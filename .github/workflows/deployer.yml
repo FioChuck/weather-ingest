@@ -33,5 +33,4 @@ jobs:
         # optional configs, see google-cloud-actions/deploy-cloud-functions for full reference
         # list of key-value pairs to set as environment variables in the form KEY1=VALUE1,KEY2=VALUE2.
 #       env_vars: # optional
-
         env_vars: 'API_KEY=${{ secrets.API_KEY }},DB_HOST=${{ secrets.DB_HOST }},DB_USER=${{ secrets.DB_USER }},DB_PASS=${{ secrets.DB_PASS }}'
