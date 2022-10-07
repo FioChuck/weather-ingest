@@ -9,7 +9,7 @@ def main(request):
     var = os.getenv('TESTVAR')
 
     print(var)
-    return
+    return 'success'
 
 # df = import_weather()
 
