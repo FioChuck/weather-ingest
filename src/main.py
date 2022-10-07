@@ -6,7 +6,7 @@ import sqlalchemy
 
 def main(request):
 
-    var = os.getenv('TEST_VAR')
+    var = os.getenv('TESTVAR')
 
     print(var)
     return
