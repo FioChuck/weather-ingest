@@ -35,6 +35,6 @@ def main(request):
                      sunset=df['sunset'],
                      timezone=df['timezone'],
                      city=df['city'],
-                     processsing_time=df['processsing_time']
+                     processing_time=df['processing_time']
                      )
     return 'success'
