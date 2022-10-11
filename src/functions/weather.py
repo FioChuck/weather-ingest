@@ -1,5 +1,6 @@
 import requests
 import os
+from datetime import datetime
 
 
 def import_weather():
@@ -36,5 +37,6 @@ def import_weather():
     result['sunset'] = out['sys']['sunset']
     result['timezone'] = out['timezone']
     result['city'] = out['name']
+    result['processing_time'] = datetime.now()  # declare processing time
 
     return result
