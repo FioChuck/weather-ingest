@@ -11,8 +11,8 @@ def main(request):
     db = connect_tcp_socket()
 
     stmt = sqlalchemy.text(
-        "INSERT INTO open_weather_api (lon,lat,desc_short,desc_long,temp,feels_like,temp_min,temp_max,pressure,humidity,visibility,wind_speed,wind_deg,clouds,dt,sunrise,sunset,timezone,city)"
-        "VALUES(:lon,:lat,:desc_short,:desc_long,:temp,:feels_like,:temp_min,:temp_max,:pressure,:humidity,:visibility,:wind_speed,:wind_deg,:clouds,:dt,:sunrise,:sunset,:timezone,:city)")
+        "INSERT INTO open_weather_api (lon,lat,desc_short,desc_long,temp,feels_like,temp_min,temp_max,pressure,humidity,visibility,wind_speed,wind_deg,clouds,dt,sunrise,sunset,timezone,city,processing_time)"
+        "VALUES(:lon,:lat,:desc_short,:desc_long,:temp,:feels_like,:temp_min,:temp_max,:pressure,:humidity,:visibility,:wind_speed,:wind_deg,:clouds,:dt,:sunrise,:sunset,:timezone,:city,:processing_time)")
 
     with db.connect() as conn:
         conn.execute(stmt,
