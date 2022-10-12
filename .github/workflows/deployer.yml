@@ -1,20 +1,16 @@
 name: Cloud Function Deployment
 
-# on commit push, run job
-on: [push]
-
+on:
+  push:
+    branches:
+      - main
 jobs:
   dev_deployment:
     name: Development Deployment
-    # worker runs on latest ubuntu
-    runs-on: ubuntu-latest #remove next
+    runs-on: ubuntu-latest
 
     steps:
-      # checkout to our repository so we have access to the source code
       - uses: actions/checkout@v3
-
-      # the actual deployment to google
-      # - name: Cloud Functions Deploy #remove next
       - id: "auth"
         uses: google-github-actions/auth@v0
         with:
@@ -24,34 +20,9 @@ jobs:
         uses: "google-github-actions/deploy-cloud-functions@v0"
         with:
           name: weather-ingest
-          # description: Ingest weather data and publish to pubsub # nullable
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           region: us-central1
           source_dir: src
-          # name of our function in our main.py file, defaults to the resource name suffix
           entry_point: main
-          # runtime to use for the function
           runtime: python39
-          # the function execution timeout
-          # timeout: 60
-          # the maximum number of instances for the function.
-          # max_instances: 1
-          # optional configs, see google-cloud-actions/deploy-cloud-functions for full reference
-          # list of key-value pairs to set as environment variables in the form KEY1=VALUE1,KEY2=VALUE2.
-          #       env_vars: # optional
           env_vars: "API_KEY=${{ secrets.API_KEY }},DB_HOST=${{ secrets.DB_HOST }},DB_USER=${{ secrets.DB_USER }},DB_PASS=${{ secrets.DB_PASS }}"
-# jobs:
-#   job_id:
-#     steps:
-#     - uses: 'actions/checkout@v3'
-
-#     - id: 'auth'
-#       uses: 'google-github-actions/auth@v0'
-#       with:
-#         credentials_json: '${{ secrets.gcp_credentials }}'
-
-#     - id: 'deploy'
-#       uses: 'google-github-actions/deploy-cloud-functions@v0'
-#       with:
-#         name: 'my-function'
-#         runtime: 'nodejs16'
