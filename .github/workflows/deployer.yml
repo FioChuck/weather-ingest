@@ -6,17 +6,17 @@ on: [push]
 jobs:
   run:
     # worker runs on latest ubuntu
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #remove next
 
     steps:
     # checkout to our repository so we have access to the source code
     - uses: actions/checkout@v3
     
     # the actual deployment to google
-    - name: Cloud Functions Deploy
-      uses: google-github-actions/deploy-cloud-functions@v0
+    - name: Cloud Functions Deploy #remove next
+      uses: google-github-actions/auth@v0
       with:
-        credentials: ${{ secrets.GCP_SA_KEY }}
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
         name: weather-ingest
         description: Ingest weather data and publish to pubsub # nullable
         project_id: ${{ secrets.GCP_PROJECT_ID }}
@@ -34,3 +34,19 @@ jobs:
         # list of key-value pairs to set as environment variables in the form KEY1=VALUE1,KEY2=VALUE2.
 #       env_vars: # optional
         env_vars: 'API_KEY=${{ secrets.API_KEY }},DB_HOST=${{ secrets.DB_HOST }},DB_USER=${{ secrets.DB_USER }},DB_PASS=${{ secrets.DB_PASS }}'
+
+jobs:
+  job_id:
+    steps:
+    - uses: 'actions/checkout@v3'
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.gcp_credentials }}'
+
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-cloud-functions@v0'
+      with:
+        name: 'my-function'
+        runtime: 'nodejs16'
