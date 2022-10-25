@@ -37,4 +37,4 @@ def main(request):
                      city=df['city'],
                      processing_time=df['processing_time']
                      )
-    return 'success'
+    return 'finish'
