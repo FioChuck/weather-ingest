@@ -4,3 +4,4 @@ SQLAlchemy
 pg8000
 requests
 google-cloud-pubsub
+python-dotenv
