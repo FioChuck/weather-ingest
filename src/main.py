@@ -1,12 +1,17 @@
 
 from functions.postgres import *
 from functions.weather import *
+from functions.pubsub import *
 import sqlalchemy
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def main(request):
 
     df = import_weather()
+
+    publish(df)
 
     db = connect_tcp_socket()
 
@@ -37,4 +42,5 @@ def main(request):
                      city=df['city'],
                      processing_time=df['processing_time']
                      )
+
     return 'finish'
