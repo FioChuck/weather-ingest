@@ -41,6 +41,6 @@ def main(request):
                      processing_time=df['processing_time']
                      )
 
-    publish(df)
+    # publish(df)
 
     return 'finish'
