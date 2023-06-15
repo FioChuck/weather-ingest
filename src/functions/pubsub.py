@@ -3,9 +3,9 @@ import json
 from datetime import datetime
 
 
-def publish(df):
+def publish(data_df):
 
-    data_df = df
+    data_df
 
     publisher = pubsub_v1.PublisherClient()
 

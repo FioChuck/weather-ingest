@@ -11,8 +11,6 @@ def main(request):
 
     df = import_weather()
 
-    publish(df)
-
     db = connect_tcp_socket()
 
     stmt = sqlalchemy.text(
@@ -42,5 +40,7 @@ def main(request):
                      city=df['city'],
                      processing_time=df['processing_time']
                      )
+
+    publish(df)
 
     return 'finish'
