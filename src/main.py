@@ -44,6 +44,3 @@ def main(request):
                      )
 
     return 'finish'
-
-
-main('none')
