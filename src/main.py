@@ -3,8 +3,8 @@ from functions.postgres import *
 from functions.weather import *
 from functions.pubsub import *
 import sqlalchemy
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 def main(request):
