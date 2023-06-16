@@ -3,9 +3,9 @@ import json
 from datetime import datetime
 
 
-def publish(data_df):
+def publish(df):
 
-    data_df
+    data_df = df
 
     publisher = pubsub_v1.PublisherClient()
 
@@ -14,9 +14,9 @@ def publish(data_df):
 
     topic_path = publisher.topic_path(GCP_PROJECT_ID, TOPIC_NAME)
 
-    data_df.pop('processing_time')
-    data_df.pop('desc_short')
-    data_df.pop('desc_long')
+    data_df.pop('processing_time', inplace=True)
+    data_df.pop('desc_short', inplace=True)
+    data_df.pop('desc_long', inplace=True)
 
     data_df['processing_time'] = str(datetime.now())
 
