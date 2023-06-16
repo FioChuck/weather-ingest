@@ -24,6 +24,6 @@ jobs:
           region: us-central1
           source_dir: src
           entry_point: main
-          vpc_connector: projects/cf-data-analytics/locations/us-central1/connectors/default
+          vpc_connector: projects/cf-data-analytics/locations/us-central1/connectors/function-vpc
           runtime: python39
           env_vars: "API_KEY=${{ secrets.API_KEY }},DB_HOST=${{ secrets.DB_HOST }},DB_USER=${{ secrets.DB_USER }},DB_PASS=${{ secrets.DB_PASS }}"
