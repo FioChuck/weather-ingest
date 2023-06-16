@@ -3,8 +3,8 @@ from functions.postgres import *
 from functions.weather import *
 from functions.pubsub import *
 import sqlalchemy
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def main(request):
@@ -42,7 +42,7 @@ def main(request):
                          processing_time=df['processing_time']
                          )
 
-    except sqlalchemy.SQLAlchemyError as e:
+    except sqlalchemy.exc.SQLAlchemyError as e:
         error = str(e.__dict__['orig'])
         print(error)
         return error
@@ -50,3 +50,6 @@ def main(request):
         # publish(df)
 
     return 'finish'
+
+
+main('none')
