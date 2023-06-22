@@ -2,8 +2,7 @@
 from functions.postgres import *
 from functions.weather import *
 from functions.pubsub import *
-from sqlalchemy import *
-from sqlalchemy.ext.declarative import declarative_base
+
 
 from dotenv import load_dotenv
 load_dotenv()
