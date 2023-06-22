@@ -1,7 +1,6 @@
 # Function dependencies, for example:
 # package>=version
-SQLAlchemy
-pg8000
+psycopg2
 requests
 google-cloud-pubsub
 python-dotenv
