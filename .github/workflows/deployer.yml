@@ -36,7 +36,7 @@ jobs:
         with:
           path: "src"
           destination: "cf-weather-ingest-source"
-          gzip: false
+          gzip: true
 
       - name: "deploy cloud function using gcloud"
         run: "gcloud  functions deploy twilio-endpoint --region=us-central1 \
