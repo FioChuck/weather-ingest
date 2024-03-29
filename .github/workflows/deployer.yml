@@ -31,12 +31,11 @@ jobs:
           name: code-directory-src
           path: src
 
-      - name: "upload src artifact to google cloud storage"
-        uses: "google-github-actions/upload-cloud-storage@v1"
-        with:
-          path: "src"
-          destination: "cf-weather-ingest-source"
-          gzip: true
+      - name: "zip source code files"
+        run: "cd generate; ls; zip generate.zip *"
+
+      - name: "upload source code"
+        run: "gsutil cp generate/generate.zip gs://cf-weather-ingest-source"
 
       - name: "deploy cloud function using gcloud"
         run: "gcloud  functions deploy weather-ingest --region=us-central1 \
