@@ -16,14 +16,49 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - id: "deploy"
-        uses: "google-github-actions/deploy-cloud-functions@v0"
+      - name: "set up google cloud sdk"
+        uses: "google-github-actions/setup-gcloud@v1"
         with:
-          name: weather-ingest
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          region: us-central1
-          source_dir: src
-          entry_point: main
-          vpc_connector: projects/cf-data-analytics/locations/us-central1/connectors/function-vpc
-          runtime: python39
-          env_vars: "API_KEY=${{ secrets.API_KEY }},DB_HOST=${{ secrets.DB_HOST }},DB_USER=${{ secrets.DB_USER }},DB_PASS=${{ secrets.DB_PASS }}"
+          version: ">= 363.0.0"
+
+      - name: "create gcs bucket for function code"
+        continue-on-error: true
+        run: "gcloud storage buckets create gs://cf-weather-ingest-source"
+
+      - name: "upload generate directory as artifact"
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-directory-src
+          path: src
+
+      - name: "upload src artifact to google cloud storage"
+        uses: "google-github-actions/upload-cloud-storage@v1"
+        with:
+          path: "web"
+          destination: "gs://cf-weather-ingest-source"
+          gzip: false
+
+      - name: "deploy cloud function using gcloud"
+        run:
+          "gcloud  functions deploy twilio-endpoint --region=${{vars.LOCATION}} \
+          --runtime=python39 --gen2 --entry-point=main \
+          --trigger-http \
+          --min-instances=1 \
+          --memory=1Gi \
+          --source=gs://cf-weather-ingest-source/src.zip \
+          --set-env-vars API_KEY=${{secrets.API_KEY}} \
+          --set-env-vars DB_HOST=${{secrets.DB_HOST}} \
+          --set-env-vars DB_USER=${{vars.DB_USER}} \
+          --set-env-vars DB_PASS=${{vars.DB_PASS}}"
+
+      # - id: "deploy"
+      #   uses: "google-github-actions/deploy-cloud-functions@v0"
+      #   with:
+      #     name: weather-ingest
+      #     project_id: ${{ secrets.GCP_PROJECT_ID }}
+      #     region: us-central1
+      #     source_dir: src
+      #     entry_point: main
+      #     vpc_connector: projects/cf-data-analytics/locations/us-central1/connectors/function-vpc
+      #     runtime: python39
+      #     env_vars: "API_KEY=${{ secrets.API_KEY }},DB_HOST=${{ secrets.DB_HOST }},DB_USER=${{ secrets.DB_USER }},DB_PASS=${{ secrets.DB_PASS }}"
