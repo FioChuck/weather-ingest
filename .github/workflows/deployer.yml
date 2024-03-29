@@ -32,10 +32,10 @@ jobs:
           path: src
 
       - name: "zip source code files"
-        run: "cd generate; ls; zip generate.zip *"
+        run: "cd src; ls; zip src.zip *"
 
       - name: "upload source code"
-        run: "gsutil cp generate/generate.zip gs://cf-weather-ingest-source"
+        run: "gsutil cp src/src.zip gs://cf-weather-ingest-source"
 
       - name: "deploy cloud function using gcloud"
         run: "gcloud  functions deploy weather-ingest --region=us-central1 \
@@ -43,7 +43,7 @@ jobs:
           --trigger-http \
           --min-instances=1 \
           --memory=1Gi \
-          --source=gs://cf-weather-ingest-source/src.zip \
+          --source=gs://cf-weather-ingest-source/src/src.zip \
           --set-env-vars API_KEY=${{secrets.API_KEY}} \
           --set-env-vars DB_HOST=${{secrets.DB_HOST}} \
           --set-env-vars DB_USER=${{vars.DB_USER}} \
