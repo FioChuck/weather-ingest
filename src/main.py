@@ -1,7 +1,6 @@
-
-from functions.postgres import *
-from functions.weather import *
-from functions.pubsub import *
+from postgres import *
+from weather import *
+from pubsub import *
 
 
 from dotenv import load_dotenv
