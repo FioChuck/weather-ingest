@@ -39,7 +39,7 @@ jobs:
           gzip: true
 
       - name: "deploy cloud function using gcloud"
-        run: "gcloud  functions deploy twilio-endpoint --region=us-central1 \
+        run: "gcloud  functions deploy weather-ingest --region=us-central1 \
           --runtime=python39 --gen2 --entry-point=main \
           --trigger-http \
           --min-instances=1 \
