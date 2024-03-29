@@ -43,7 +43,7 @@ jobs:
           --trigger-http \
           --min-instances=1 \
           --memory=1Gi \
-          --source=gs://cf-weather-ingest-source/src/src.zip \
+          --source=gs://cf-weather-ingest-source/src.zip \
           --set-env-vars API_KEY=${{secrets.API_KEY}} \
           --set-env-vars DB_HOST=${{secrets.DB_HOST}} \
           --set-env-vars DB_USER=${{vars.DB_USER}} \
