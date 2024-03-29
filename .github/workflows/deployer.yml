@@ -35,7 +35,7 @@ jobs:
         uses: "google-github-actions/upload-cloud-storage@v1"
         with:
           path: "src"
-          destination: "gs://cf-weather-ingest-source"
+          destination: "cf-weather-ingest-source"
           gzip: false
 
       - name: "deploy cloud function using gcloud"
