@@ -16,6 +16,3 @@ def main(request):
     publish(df)
 
     return 'finish'
-
-
-# main('none')

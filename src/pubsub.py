@@ -15,8 +15,8 @@ def publish(df):
     topic_path = publisher.topic_path(GCP_PROJECT_ID, TOPIC_NAME)
 
     data_df.pop('processing_time')
-    data_df.pop('desc_short')
-    data_df.pop('desc_long')
+    # data_df.pop('desc_short')
+    # data_df.pop('desc_long')
 
     data_df['processing_time'] = str(datetime.now())
 
