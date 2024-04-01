@@ -11,6 +11,7 @@ def main(request):
 
     df = import_weather()
 
+    #  remove cdc support
     # postgres_insert(df)
 
     publish(df)
