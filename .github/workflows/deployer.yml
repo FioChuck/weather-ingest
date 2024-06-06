@@ -39,7 +39,7 @@ jobs:
 
       - name: "deploy cloud function using gcloud"
         run: "gcloud  functions deploy weather-ingest --region=us-central1 \
-          --runtime=python39 --gen2 --entry-point=main \
+          --runtime=python310 --gen2 --entry-point=main \
           --trigger-http \
           --min-instances=1 \
           --memory=1Gi \
