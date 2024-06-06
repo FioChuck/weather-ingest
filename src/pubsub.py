@@ -3,16 +3,16 @@ import json
 from datetime import datetime
 
 
-def publish(df):
+def publish(df, project, topic):
 
     data_df = df
 
     publisher = pubsub_v1.PublisherClient()
 
-    GCP_PROJECT_ID = "cf-data-analytics"
-    TOPIC_NAME = "weather-data"
+    # project = "cf-data-analytics"
+    # topic = "weather-data"
 
-    topic_path = publisher.topic_path(GCP_PROJECT_ID, TOPIC_NAME)
+    topic_path = publisher.topic_path(project, topic)
 
     data_df.pop('processing_time')
     # data_df.pop('desc_short')
@@ -30,3 +30,15 @@ def publish(df):
     except Exception as e:
         print(e)
         return (e, 500)
+
+
+def router(df, destination):
+    match destination:
+        case "weather-data":
+            response = publish(df, "cf-data-analytics", "weather-data")
+            return response
+        case "weather-data-short":
+            df.pop('desc_short')
+            df.pop('desc_long')
+            response = publish(df, "cf-data-analytics", "weather-data-short")
+            return response

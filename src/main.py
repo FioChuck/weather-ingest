@@ -14,6 +14,8 @@ def main(request):
     #  remove cdc support
     # postgres_insert(df)
 
-    publish(df)
+    router(df, "weather-data")
+
+    router(df, "weather-data-short")
 
     return 'finish'
